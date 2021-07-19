@@ -44,4 +44,15 @@ RSpec.describe 'it can display a show page for a movie along with with the actor
 
     expect(page).to have_content("Average Age of Actors: 59.67 years old")
   end
+
+  it 'can fill out a form on the movies show page and be redirected to see that actor created and associated with this movie' do
+      
+    fill_in("Name", with: "Ian McShane")
+    fill_in("Age", with: 78)
+
+    click_button('Create Actor')
+
+    expect(current_path).to eq("/movies/#{@movie1.id}")
+    expect(page).to have_content("Ian McShane")
+  end
 end
